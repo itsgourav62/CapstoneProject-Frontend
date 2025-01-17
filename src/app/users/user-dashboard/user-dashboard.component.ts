@@ -12,7 +12,7 @@ export class UserDashboardComponent {
     {
       name: 'Electricity',
       description: 'Pay your electricity bill quickly.',
-      image: 'assets/images/Electricity-bill.png',
+      image: 'assets/images/electricity-bill-icon.png',
       link: '/pay/electricity',
     },
     {
