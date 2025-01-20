@@ -1,76 +1,148 @@
-<div class="container-fluid bg-light vh-100">
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4">
-      <a class="navbar-brand text-primary fw-bold" routerLink="/">QwikPay</a>
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            href="#"
-            id="userMenu"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            User
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="userMenu">
-            <li><a class="dropdown-item" routerLink="/profile">Profile</a></li>
-            <li><a class="dropdown-item" routerLink="/logout">Logout</a></li>
-          </ul>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">BillPay Dashboard</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Bills</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Payment History</a>
         </li>
       </ul>
-    </nav>
-  
-    <!-- Main Content -->
-    <div class="container py-4">
-      <div class="row">
-        <!-- Bills Section -->
-        <div class="col-md-8">
-          <h3 class="text-primary mb-4">Pay Your Bills</h3>
-          <div class="row g-3">
-            <!-- Bill Cards -->
-            <div class="col-md-4" *ngFor="let bill of bills">
-              <div class="card text-center shadow-sm h-100">
-                <img [src]="bill.image" class="card-img-top" [alt]="bill.name" />
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">{{ bill.name }}</h5>
-                  <p class="card-text flex-grow-1">{{ bill.description }}</p>
-                  <a [routerLink]="bill.link" class="btn btn-primary btn-sm mt-auto">Pay Now</a>
-                </div>
-              </div>
-            </div>
-          </div>
+      <!-- User Profile Dropdown -->
+      <div class="dropdown">
+        <a
+          class="nav-link dropdown-toggle text-white d-flex align-items-center"
+          href="#"
+          id="userDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="https://img.freepik.com/free-vector/young-man-with-glasses-illustration_1308-174706.jpg?semt=ais_hybrid"
+            class="rounded-circle me-2"
+            alt="User Avatar"
+            width="40"
+            height="40"
+          />
+          {{ userName }}
+        </a>
+        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+          <li>
+            <a class="dropdown-item" href="#" (click)="goToAccount()">Account</a>
+          </li>
+          <li>
+            <a class="dropdown-item text-danger" href="#" (click)="logout()">Logout</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Dashboard Content -->
+<div class="container my-4">
+  <div class="row">
+    <div class="col-12 text-center mb-4">
+      <h1>Welcome to Your Dashboard</h1>
+      <p class="text-muted">Manage your bills and payments with ease</p>
+    </div>
+  </div>
+
+  <!-- Cards Section -->
+  <div class="row g-4">
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title">Pay Bills</h5>
+          <p class="card-text">Quickly pay your outstanding bills.</p>
+          <button class="btn btn-primary w-100" (click)="onPayNow()" [disabled]="isProcessing">
+            <span *ngIf="isProcessing" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            Pay Now
+          </button>
         </div>
-  
-        <!-- Sidebar Section -->
-        <div class="col-md-4">
-          <!-- Due Amount Section -->
-          <div class="card mb-4 shadow-sm h-100">
-            <div class="card-body">
-              <h5 class="card-title text-danger">Due Amount</h5>
-              <p class="card-text">
-                <strong>Total Due:</strong> ₹{{ dueAmount }}
-              </p>
-              <p class="card-text">
-                <strong>Due Date:</strong> {{ dueDate | date: 'longDate' }}
-              </p>
-              <a routerLink="/pay-all" class="btn btn-danger btn-sm">Pay All</a>
-            </div>
-          </div>
-  
-          <!-- Recent Activity Section -->
-          <div class="card shadow-sm h-100">
-            <div class="card-body">
-              <h5 class="card-title text-primary">Recent Activity</h5>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item" *ngFor="let activity of recentActivities">
-                  {{ activity }}
-                </li>
-              </ul>
-            </div>
-          </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title">View Bills</h5>
+          <p class="card-text">See all your pending and paid bills.</p>
+          <button class="btn btn-success w-100" (click)="goToViewBills()">View Bills</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body text-center">
+          <h5 class="card-title">Payment History</h5>
+          <p class="card-text">Track all your previous payments.</p>
+          <button class="btn btn-info w-100" (click)="goToPaymentHistory()">View History</button>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Recent Transactions -->
+  <div class="row mt-5">
+    <div class="col-12">
+      <h2>Recent Transactions</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="table-primary">
+            <tr>
+              <th>Bill ID</th>
+              <th>Amount</th>
+              <th>Status</th>
+              <th>Payment Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaction of transactions">
+              <td>{{ transaction.billId }}</td>
+              <td>{{ transaction.amount | currency }}</td>
+              <td>
+                <span
+                  class="badge"
+                  [ngClass]="transaction.status === 'Paid' ? 'bg-success' : 'bg-warning'"
+                >
+                  {{ transaction.status }}
+                </span>
+              </td>
+              <td>{{ transaction.paymentDate || 'N/A' }}</td>
+              <td>
+                <button
+                  class="btn btn-sm btn-outline-primary"
+                  (click)="viewTransaction(transaction)"
+                >
+                  View
+                </button>
+              </td>
+            </tr>
+            <tr *ngIf="transactions.length === 0">
+              <td colspan="5" class="text-center">No recent transactions</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

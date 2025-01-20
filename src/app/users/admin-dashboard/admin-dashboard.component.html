@@ -1,0 +1,84 @@
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <p-sidebar [(visible)]="sidebarVisible" [baseZIndex]="1000" [style]="{ width: '250px', background: '#212121' }">
+      <h3 class="sidebar-header">Admin Dashboard</h3>
+      <ul class="menu">
+        <li>
+          <a (click)="activeView = 'dashboard'">Dashboard</a>
+        </li>
+        <li>
+          <a (click)="toggleDropdown('customers')">Customers <span class="toggle-icon">+</span></a>
+          <ul *ngIf="dropdowns.customers" class="submenu">
+            <li><a (click)="activeView = 'viewCustomers'">View</a></li>
+            <li><a (click)="activeView = 'editCustomers'">Edit</a></li>
+            <li><a (click)="activeView = 'deleteCustomers'">Delete</a></li>
+            <li><a (click)="activeView = 'newCustomer'">Add New</a></li>
+          </ul>
+        </li>
+        <li>
+          <a  (click)="toggleDropdown('bills')">Bills <span class="toggle-icon">+</span></a>
+          <ul *ngIf="dropdowns.bills" class="submenu">
+            <li><a (click)="activeView = 'viewBills'">View/Edit/Delete</a></li>
+            <li><a (click)="activeView = 'generateBill'">Generate Bill</a></li>
+          </ul>
+        </li>
+        <li>
+          <a (click)="toggleDropdown('payments')">Payments <span class="toggle-icon">+</span></a>
+          <ul *ngIf="dropdowns.payments" class="submenu">
+            <li><a (click)="activeView = 'viewPayments'">View/Edit/Delete</a></li>
+            <li><a (click)="activeView = 'processPayment'">Process Payment</a></li>
+          </ul>
+        </li>
+      </ul>
+    </p-sidebar>
+  
+    <!-- Sidebar Toggle Button -->
+    <button *ngIf="!sidebarVisible" class="sidebar-toggle-btn" (click)="toggleSidebar()">☰</button>
+  
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Header -->
+      <div class="header">
+        <h2>Hello, {{ username }}</h2>
+        <div class="profile-section ms-auto">
+          <div class="dropdown">
+            <a
+              class="btn btn-link d-inline-flex align-items-center dropdown-toggle"
+              href="#"
+              role="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <span class="avatar avatar-sm avatar-status avatar-status-success me-3">
+                <img class="avatar-img" src="assets/img/photos/photo-6.jpg" alt="User Avatar" />
+              </span>
+              {{ username }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#">Account</a></li>
+              <li><a class="dropdown-item" href="#">Change Password</a></li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li><a class="dropdown-item" href="#">Sign Out</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Content -->
+      <div class="content">
+        <div *ngIf="activeView === 'dashboard'" class="chart-container shadow">
+          <h3 class="chart-title">Tracking Details</h3>
+          <p-chart type="bar" [data]="chartData" [options]="chartOptions" class="custom-chart"></p-chart>
+        </div>
+        <div *ngIf="activeView === 'newCustomer'">
+          <!-- New Customer Form Component -->
+        </div>
+        <div *ngIf="activeView === 'generateBill'">
+          <!-- Generate Bill Form Component -->
+        </div>
+      </div>
+    </div>
+  </div>
+  

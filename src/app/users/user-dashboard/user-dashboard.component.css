@@ -1,0 +1,14 @@
+.card {
+    border: none;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .table {
+    margin-top: 1rem;
+  }
+  
