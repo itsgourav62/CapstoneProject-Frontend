@@ -1,1 +1,31 @@
-<p>manage-bills works!</p>
+<div class="container">
+    <h2>Manage Bills</h2>
+    <button class="btn btn-primary mb-3" (click)="addBill()">Add Bill</button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Bill Number</th>
+          <th>Customer</th>
+          <th>Amount</th>
+          <th>Due Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bill of bills; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ bill.billNumber }}</td>
+          <td>{{ bill.customerName }}</td>
+          <td>{{ bill.amount }}</td>
+          <td>{{ bill.dueDate }}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="viewBill(bill)">View</button>
+            <button class="btn btn-warning btn-sm" (click)="editBill(bill)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteBill(bill.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
