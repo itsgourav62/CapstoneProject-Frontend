@@ -1,0 +1,96 @@
+<div class="container mt-5 d-flex justify-content-center">
+    <!-- Payment Form Card -->
+    <div class="card shadow-lg" style="max-width: 500px; width: 100%;">
+      <div class="card-header bg-primary text-white text-center">
+        <h4 class="mb-0">Payment Form</h4>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="onSubmitPayment()" #paymentForm="ngForm">
+          <div class="row g-3">
+            <!-- Amount -->
+            <div class="col-12">
+              <label for="amount" class="form-label">Amount</label>
+              <input
+                id="amount"
+                type="number"
+                class="form-control"
+                [(ngModel)]="paymentData.amount"
+                name="amount"
+                placeholder="Enter amount"
+                required
+              />
+            </div>
+  
+            <!-- Payment Status -->
+            <!-- <div class="col-12">
+              <label for="paymentStatus" class="form-label">Payment Status</label>
+              <select
+                id="paymentStatus"
+                class="form-select"
+                [(ngModel)]="paymentData.paymentStatus"
+                name="paymentStatus"
+                required
+              >
+                <option *ngFor="let status of paymentStatusOptions" [value]="status.value">
+                  {{ status.label }}
+                </option>
+              </select>
+            </div> -->
+  
+            <!-- Bill ID -->
+            <div class="col-12">
+              <label for="billId" class="form-label">Bill ID</label>
+              <input
+                id="billId"
+                type="number"
+                class="form-control"
+                [(ngModel)]="paymentData.bill_id"
+                name="bill_id"
+                placeholder="Enter bill ID"
+                required
+              />
+            </div>
+  
+            <!-- Payment Date -->
+            <div class="col-12">
+              <label for="paymentDate" class="form-label">Payment Date</label>
+              <input
+                id="paymentDate"
+                type="text"
+                class="form-control"
+                [value]="paymentData.paymentDate"
+                name="paymentDate"
+                readonly
+              />
+            </div>
+          </div>
+  
+          <!-- Buttons -->
+          <div class="d-flex justify-content-between mt-4">
+            <!-- Cancel Button -->
+            <button
+              type="button"
+              class="btn btn-secondary btn-lg"
+              [routerLink]="['/dashboard']"
+            >
+              Cancel
+            </button>
+  
+            <!-- Pay Now Button -->
+            <button
+              type="submit"
+              class="btn btn-success btn-lg"
+              [disabled]="isProcessing"
+            >
+              <span *ngIf="isProcessing" class="spinner-border spinner-border-sm me-2"></span>
+              Pay Now
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <p-toast></p-toast>
+  
+  
+  <p-toast></p-toast>
