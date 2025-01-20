@@ -1,0 +1,27 @@
+<div class="container">
+    <h2>Manage Customers</h2>
+    <button class="btn btn-primary mb-3" (click)="addCustomer()">Add Customer</button>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customers; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.email }}</td>
+          <td>
+            <button class="btn btn-info btn-sm" (click)="viewCustomer(customer)">View</button>
+            <button class="btn btn-warning btn-sm" (click)="editCustomer(customer)">Edit</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteCustomer(customer.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
