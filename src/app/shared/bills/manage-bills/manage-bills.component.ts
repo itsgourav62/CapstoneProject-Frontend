@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./manage-bills.component.css']
 })
 export class ManageBillsComponent {
+
   bills = [
     { id: 1, billNumber: 'B001', customerName: 'John Doe', amount: 100, dueDate: '2025-01-25' },
     { id: 2, billNumber: 'B002', customerName: 'Jane Smith', amount: 200, dueDate: '2025-01-30' },
@@ -26,4 +27,5 @@ export class ManageBillsComponent {
   deleteBill(id: number) {
     this.bills = this.bills.filter(b => b.id !== id);
   }
+
 }
