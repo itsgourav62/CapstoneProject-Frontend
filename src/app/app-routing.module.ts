@@ -10,6 +10,9 @@ import { authGuard } from './security/auth.guard';
 import { adminGuardGuard } from './security/admin-guard.guard';
 import { BillsComponent } from './shared/bills/bills/bills.component';
 import { PaymentComponent } from './shared/payments/payment/payment.component';
+import { ManageBillsComponent } from './shared/bills/manage-bills/manage-bills.component';
+import { ManagePaymentsComponent } from './shared/bills/manage-payments/manage-payments.component';
+import { ManageCustomersComponent } from './users/manage-customers/manage-customers.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent }, // Home Page
@@ -20,6 +23,9 @@ const routes: Routes = [
   { path: 'admin-dashboard', component: AdminDashboardComponent, canActivate: [adminGuardGuard] }, // User Dashboard
   { path: 'bills', component: BillsComponent },
   { path: 'payment',component:PaymentComponent},
+  { path: 'manage-customers', component: ManageCustomersComponent },
+  { path: 'manage-bills', component: ManageBillsComponent },
+  { path: 'manage-payments', component: ManagePaymentsComponent },
   { path: '**', redirectTo: '' } // Redirect invalid routes to Home
 ];
 
