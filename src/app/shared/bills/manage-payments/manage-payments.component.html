@@ -1,31 +1,123 @@
 <div class="container">
-    <h2>Manage Payments</h2>
-    <button class="btn btn-primary mb-3" (click)="addPayment()">Add Payment</button>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Payment ID</th>
-          <th>Customer</th>
-          <th>Amount</th>
-          <th>Date</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let payment of payments; let i = index">
-          <td>{{ i + 1 }}</td>
-          <td>{{ payment.paymentId }}</td>
-          <td>{{ payment.customerName }}</td>
-          <td>{{ payment.amount }}</td>
-          <td>{{ payment.date }}</td>
-          <td>
-            <button class="btn btn-info btn-sm" (click)="viewPayment(payment)">View</button>
-            <button class="btn btn-warning btn-sm" (click)="editPayment(payment)">Edit</button>
-            <button class="btn btn-danger btn-sm" (click)="deletePayment(payment.id)">Delete</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <h2>Payments Management</h2>
+  
+    <!-- Search by User ID -->
+    <div>
+      <label for="userId">Search by User ID:</label>
+      <input
+        type="number"
+        id="userId"
+        [(ngModel)]="searchCriteria.userId"
+        placeholder="Enter User ID"
+      />
+      <button (click)="searchByUserId()">Search</button>
+    </div>
+  
+    <!-- Search by Status -->
+    <div>
+      <label for="status">Search by Status:</label>
+      <input
+        type="text"
+        id="status"
+        [(ngModel)]="searchCriteria.status"
+        placeholder="Enter Status"
+      />
+      <button (click)="searchByStatus()">Search</button>
+    </div>
+  
+    <!-- Payment List -->
+    <div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>Bill ID</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let payment of payments">
+            <td>{{ payment.pmtId }}</td>
+            <td>{{ payment.amount }}</td>
+            <td>{{ payment.paymentStatus }}</td>
+            <td>{{ payment.paymentDate }}</td>
+            <td>{{ payment.bill_id }}</td>
+            <td>
+              <button class="btn btn-primary" (click)="openUpdateModal(payment)">Update</button>
+              <button class="btn btn-danger" (click)="deletePayment(payment.pmtId)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Error Message -->
+    <p *ngIf="errorMessage" class="error">{{ errorMessage }}</p>
+  
+    <!-- Update Payment Modal -->
+    <div class="modal" tabindex="-1" role="dialog" [ngClass]="{'show': isModalVisible}" style="display: block;" *ngIf="isModalVisible">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Update Payment</h5>
+            <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form #updateForm="ngForm" (ngSubmit)="onSubmit(updateForm)">
+              <div class="form-group">
+                <label for="amount">Amount</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="amount"
+                  [(ngModel)]="selectedPayment.amount"
+                  name="amount"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="paymentStatus">Payment Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="paymentStatus"
+                  [(ngModel)]="selectedPayment.paymentStatus"
+                  name="paymentStatus"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="paymentDate">Payment Date</label>
+                <input
+                  type="datetime-local"
+                  class="form-control"
+                  id="paymentDate"
+                  [(ngModel)]="selectedPayment.paymentDate"
+                  name="paymentDate"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="bill_id">Bill ID</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="bill_id"
+                  [(ngModel)]="selectedPayment.bill_id"
+                  name="bill_id"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-success" [disabled]="!updateForm.form.valid">Update</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   

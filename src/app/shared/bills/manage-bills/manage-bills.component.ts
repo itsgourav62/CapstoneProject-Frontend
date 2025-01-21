@@ -1,29 +1,47 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Bill } from '../bill.model';
+import { BillManagementService } from 'src/app/services/bill_management.service';
 
 @Component({
   selector: 'app-manage-bills',
   templateUrl: './manage-bills.component.html',
   styleUrls: ['./manage-bills.component.css']
 })
-export class ManageBillsComponent {
-  bills = [
-    { id: 1, billNumber: 'B001', customerName: 'John Doe', amount: 100, dueDate: '2025-01-25' },
-    { id: 2, billNumber: 'B002', customerName: 'Jane Smith', amount: 200, dueDate: '2025-01-30' },
-  ];
+export class ManageBillsComponent implements OnInit {
+  bills: Bill[] = []; // Use the Bill model for typing
 
-  addBill() {
-    alert('Add Bill clicked!');
+  constructor(private http: HttpClient,private billService:BillManagementService) {}
+
+  ngOnInit(): void {
+    this.fetchBills();
   }
 
-  viewBill(bill: any) {
-    alert(`View Bill: ${bill.billNumber}, Amount: $${bill.amount}`);
+  fetchBills(): void {
+    this.billService.fetchAllBills().subscribe({
+      next: (data) => {
+        this.bills = data.map(
+          (bill) =>
+            new Bill(
+              bill.billId,
+              bill.amount,
+              bill.billType,
+              bill.billStatus,
+              bill.description,
+              bill.due_date,
+              bill.created_at,
+              bill.user
+            )
+        );
+        console.log('Fetched bills:', this.bills); // Optional for debugging
+      },
+      error: (error) => {
+        console.error('Error fetching bills:', error);
+      },
+      complete: () => {
+        console.log('Fetching bills completed.'); // Optional: log when completed
+      },
+    });
   }
-
-  editBill(bill: any) {
-    alert(`Edit Bill: ${bill.billNumber}`);
-  }
-
-  deleteBill(id: number) {
-    this.bills = this.bills.filter(b => b.id !== id);
-  }
+  
 }
