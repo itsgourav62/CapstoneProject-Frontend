@@ -25,6 +25,9 @@ import { MenuModule } from 'primeng/menu';
 import { BillsComponent } from './shared/bills/bills/bills.component';
 import { PaymentComponent } from './shared/payments/payment/payment.component';
 import { CardModule } from 'primeng/card';
+import { ManageCustomersComponent } from './users/manage-customers/manage-customers.component';
+import { ManageBillsComponent } from './shared/bills/manage-bills/manage-bills.component';
+import { ManagePaymentsComponent } from './shared/bills/manage-payments/manage-payments.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +40,10 @@ import { CardModule } from 'primeng/card';
     UserDashboardComponent,
     AdminDashboardComponent,
     BillsComponent,
-    PaymentComponent
+    PaymentComponent,
+    ManageCustomersComponent,
+    ManageBillsComponent,
+    ManagePaymentsComponent
   ],
   imports: [
     BrowserModule,
