@@ -36,10 +36,6 @@ export class ManageCustomersComponent implements OnInit {
     });
   }
 
-  addCustomer(): void {
-    alert('Add customer functionality to be implemented.');
-  }
-
   viewCustomerDetails(customer: Customer): void {
     this.selectedCustomer = customer;
     const modalElement = document.getElementById('customerDetailsModal');
@@ -47,30 +43,6 @@ export class ManageCustomersComponent implements OnInit {
       const modalInstance = new bootstrap.Modal(modalElement);
       modalInstance.show();
     }
-  }
-
-  // openEditCustomerModal(customer: Customer): void {
-  //   this.selectedCustomer = { ...customer }; // Clone to avoid modifying the original
-  //   this.selectedRoleId = this.selectedCustomer.roles[0]?.id || 1; // Set role ID
-  //   const modalElement = document.getElementById('editCustomerModal');
-  //   if (modalElement) {
-  //     const modalInstance = new bootstrap.Modal(modalElement);
-  //     modalInstance.show();
-  //   }
-  // }
-
-  // Set default structure for Customer
-  defaultCustomer(): Customer {
-    return {
-      id: 0,
-      username: '',
-      email: '',
-      // password: '',
-      mobile: '',
-      address: '',
-      gender: '',
-      roles: [{ id: 1, name: 'ROLE_USER' }]
-    };
   }
 
   openEditCustomerModal(customer: Customer): void {
@@ -132,9 +104,28 @@ export class ManageCustomersComponent implements OnInit {
       });
     }
   }
+
   logout(): void {
     localStorage.clear();
     this.authService.logout();
     this.router.navigate(['/login']);
+  }
+
+  // Go Back Button Functionality
+  goBack(): void {
+    this.router.navigate(['/admin-dashboard']); // Navigate back to the admin dashboard
+  }
+
+  // Set default structure for Customer
+  defaultCustomer(): Customer {
+    return {
+      id: 0,
+      username: '',
+      email: '',
+      mobile: '',
+      address: '',
+      gender: '',
+      roles: [{ id: 1, name: 'ROLE_USER' }]
+    };
   }
 }
