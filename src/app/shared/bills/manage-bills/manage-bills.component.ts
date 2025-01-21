@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';  // Import Router
 import { Bill } from '../bill.model';
 import { BillManagementService } from 'src/app/services/bill_management.service';
 
@@ -11,15 +12,21 @@ import { BillManagementService } from 'src/app/services/bill_management.service'
 export class ManageBillsComponent implements OnInit {
   bills: Bill[] = []; // Use the Bill model for typing
 
-  constructor(private http: HttpClient,private billService:BillManagementService) {}
+  // Inject Router in the constructor
+  constructor(
+    private http: HttpClient,
+    private billService: BillManagementService,
+    private router: Router  // Inject Router
+  ) {}
 
   ngOnInit(): void {
-    this.fetchBills();
+    this.fetchBills();  // Fetch bills when the component initializes
   }
 
   fetchBills(): void {
     this.billService.fetchAllBills().subscribe({
       next: (data) => {
+        // Map the response data to the Bill model
         this.bills = data.map(
           (bill) =>
             new Bill(
@@ -43,5 +50,9 @@ export class ManageBillsComponent implements OnInit {
       },
     });
   }
-  
+
+  // Back Button Functionality
+  goBack(): void {
+    this.router.navigate(['/admin-dashboard']); // Navigate back to the admin dashboard
+  }
 }

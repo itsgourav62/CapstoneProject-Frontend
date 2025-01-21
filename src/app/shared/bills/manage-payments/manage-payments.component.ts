@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';  // Import Router
 import { PaymentService } from 'src/app/services/payment.service';
 import { Payment } from './payment.model';
 
@@ -14,7 +15,7 @@ export class ManagePaymentsComponent implements OnInit {
   selectedPayment: Payment = { pmtId: 0, amount: 0, paymentStatus: '', paymentDate: '', bill_id: 0 };
   isModalVisible: boolean = false;
 
-  constructor(private paymentService: PaymentService) {}
+  constructor(private paymentService: PaymentService, private router: Router) {}  // Inject Router
 
   ngOnInit(): void {
     this.fetchPayments();
@@ -43,7 +44,6 @@ export class ManagePaymentsComponent implements OnInit {
     }
   }
 
-  // Fetch all payments
   fetchPayments(): void {
     this.paymentService.fetchAllPayments().subscribe({
       next: (data) => (this.payments = data),
@@ -51,7 +51,6 @@ export class ManagePaymentsComponent implements OnInit {
     });
   }
 
-  // Search payments by user ID
   searchByUserId(): void {
     const userId = this.searchCriteria.userId;
     if (userId > 0) {
@@ -68,7 +67,6 @@ export class ManagePaymentsComponent implements OnInit {
     }
   }
 
-  // Search payments by status
   searchByStatus(): void {
     const status = this.searchCriteria.status;
     if (status.trim()) {
@@ -85,7 +83,6 @@ export class ManagePaymentsComponent implements OnInit {
     }
   }
 
-  // Clear search fields
   clearSearch(fieldName: string): void {
     if (fieldName === 'userId') {
       this.searchCriteria.userId = 0;  // Reset userId field
@@ -94,7 +91,6 @@ export class ManagePaymentsComponent implements OnInit {
     }
   }
 
-  // Delete a payment
   deletePayment(pmtId: number): void {
     this.paymentService.deletePayment(pmtId).subscribe({
       next: () => {
@@ -102,5 +98,10 @@ export class ManagePaymentsComponent implements OnInit {
       },
       error: (error) => (this.errorMessage = error.message),
     });
+  }
+
+  // Back Button Functionality
+  goBack(): void {
+    this.router.navigate(['/admin-dashboard']); // Navigate back to the dashboard list route
   }
 }
