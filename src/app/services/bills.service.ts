@@ -9,11 +9,16 @@ import { BillConstants } from '../shared/bills/constants/bill-constants';
 export class BillsService {
     constructor(private http: HttpClient) {}
 
-    getUserBills(userId: string): Observable<any[]> {
+    getUserBills(userId: string): Observable<any> {
+      const token = localStorage.getItem('token'); // Replace with your token key
       const headers = new HttpHeaders({
-        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
       });
-      const url = `${BillConstants.GetUserBills}/${userId}`;
-      return this.http.get<any[]>(url, { headers });
-    }
+  
+      return this.http.get(`${BillConstants.GetUserBills}/${userId}`, { headers });
+  }
+
+
+  
 }

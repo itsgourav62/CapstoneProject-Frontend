@@ -1,26 +1,145 @@
-<div class="container-fluid">
-  <div class="row">
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-      <div class="sidebar-sticky">
+<div class="container-fluid vh-100">
+  <div class="row h-100">
+    <!-- Sidebar -->
+    <nav class="col-md-2 d-md-block bg-dark text-light sidebar position-fixed h-100">
+      <div class="sidebar-sticky pt-3">
+        <h5 class="text-center text-uppercase mb-4">Admin Dashboard</h5>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" routerLink="/dashboard">Dashboard</a>
+            <a
+              class="nav-link text-light active"
+              routerLink="/dashboard"
+              routerLinkActive="active"
+            >
+              <i class="bi bi-house-fill"></i> Dashboard
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/manage-customers">Manage Customers</a>
+            <a
+              class="nav-link text-light"
+              routerLink="/manage-customers"
+              routerLinkActive="active"
+            >
+              <i class="bi bi-people-fill"></i> Manage Customers
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/manage-bills">Manage Bills</a>
+            <a
+              class="nav-link text-light"
+              routerLink="/manage-bills"
+              routerLinkActive="active"
+            >
+              <i class="bi bi-file-earmark-text-fill"></i> Manage Bills
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/manage-payments">Manage Payments</a>
+            <a
+              class="nav-link text-light"
+              routerLink="/manage-payments"
+              routerLinkActive="active"
+            >
+              <i class="bi bi-cash-coin"></i> Manage Payments
+            </a>
+          </li>
+          <li class="nav-item mt-4">
+            <button class="btn btn-danger w-100" (click)="logout()">Logout</button>
           </li>
         </ul>
       </div>
     </nav>
 
-    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-      <router-outlet></router-outlet>
+    <!-- Main Content -->
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-4">
+      <!-- Welcome Section -->
+      <div class="row mt-4">
+        <div class="col-12">
+          <h1 class="text-primary">Welcome, Admin!</h1>
+          <p class="text-muted">Manage customers, bills, and payments efficiently.</p>
+        </div>
+      </div>
+
+      <!-- Manage Section -->
+      <div class="row mt-4">
+        <!-- Manage Customers -->
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">Manage Customers</h5>
+              <p class="card-text">
+                Create, edit, view, and delete customer information.
+              </p>
+              <button
+                class="btn btn-primary w-100"
+                routerLink="/manage-customers"
+              >
+                Go to Customers
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Manage Bills -->
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">Manage Bills</h5>
+              <p class="card-text">
+                Create, edit, view, and delete customer bills.
+              </p>
+              <button
+                class="btn btn-success w-100"
+                routerLink="/manage-bills"
+              >
+                Go to Bills
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Manage Payments -->
+        <div class="col-md-4">
+          <div class="card shadow-sm">
+            <div class="card-body text-center">
+              <h5 class="card-title">Manage Payments</h5>
+              <p class="card-text">
+                View, create, update, and delete payment details.
+              </p>
+              <button
+                class="btn btn-warning w-100"
+                routerLink="/manage-payments"
+              >
+                Go to Payments
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistics Section -->
+      <div class="row mt-4">
+        <div class="col-md-4">
+          <div class="card text-center bg-light shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Total Customers</h5>
+              <p class="card-text fs-3">1,245</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center bg-light shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Bills Generated</h5>
+              <p class="card-text fs-3">2,380</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card text-center bg-light shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Payments Processed</h5>
+              <p class="card-text fs-3">$12,450</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
   </div>
 </div>
