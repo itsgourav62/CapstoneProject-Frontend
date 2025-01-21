@@ -59,7 +59,8 @@ import { ManagePaymentsComponent } from './shared/bills/manage-payments/manage-p
     SidebarModule,
     ButtonModule,
     MenuModule,
-    CardModule
+    CardModule,
+    
     
   ],
   providers: [MessageService],

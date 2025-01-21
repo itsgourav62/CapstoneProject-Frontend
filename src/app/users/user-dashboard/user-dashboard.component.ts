@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PaymentService } from 'src/app/services/payment.service';
+import { Payment } from 'src/app/shared/bills/manage-payments/payment.model';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -9,19 +11,37 @@ import { Router } from '@angular/router';
 export class UserDashboardComponent implements OnInit {
   userName: string = 'User'; // Default username
   isProcessing: boolean = false; // Spinner state for "Pay Now" button
-  transactions: Transaction[] = [
-    { billId: 'B12345', amount: 1500, status: 'Paid', paymentDate: '2025-01-15' },
-    { billId: 'B12346', amount: 800, status: 'Pending', paymentDate: null },
-    { billId: 'B12347', amount: 1200, status: 'Paid', paymentDate: '2025-01-10' },
-  ];
+  transactions: Payment[] = [];
+  errorMessage: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private paymentService: PaymentService ) {}
 
   ngOnInit(): void {
     // Load username from local storage
     const storedUserName = localStorage.getItem('username');
     this.userName = storedUserName ? storedUserName : 'User';
+
+    this.fetchPayments();
   }
+
+
+ // Fetch all payments
+ fetchPayments(): void {
+  const userId = localStorage.getItem('id'); // Get the userId from localStorage
+  if (userId) {
+    this.paymentService.searchPaymentsByUserId(+userId).subscribe({
+      next: (data) => {
+        this.transactions = data;
+      },
+      error: (error) => {
+        this.errorMessage = `Error fetching transactions: ${error.message}`;
+      },
+    });
+  } else {
+    this.errorMessage = 'User not logged in!';
+  }
+}
+
 
   onPayNow(): void {
     this.router.navigate(['/payment']);
@@ -53,8 +73,8 @@ export class UserDashboardComponent implements OnInit {
     }
   }
 
-  viewTransaction(transaction: Transaction): void {
-    alert(`Viewing transaction details:\nBill ID: ${transaction.billId}\nAmount: ${transaction.amount}\nStatus: ${transaction.status}\nPayment Date: ${transaction.paymentDate || 'N/A'}`);
+  viewTransaction(transaction: Payment): void {
+    alert(`Viewing transaction details:\nBill ID: ${transaction.bill_id}\nAmount: ${transaction.amount}\nStatus: ${transaction.paymentStatus}\nPayment Date: ${transaction.paymentDate}`);
   }
 }
 
