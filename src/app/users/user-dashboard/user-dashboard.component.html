@@ -1,63 +1,23 @@
-<!-- Navigation Bar -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">BillPay Dashboard</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarNav"
-      aria-controls="navbarNav"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
+    <a class="navbar-brand" href="#">Dashboard</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
+      <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link active" href="#">Home</a>
+          <span class="navbar-text text-white">
+            Welcome, {{ userName }} <!-- Display Username -->
+          </span>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Bills</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Payment History</a>
+          <button class="btn btn-outline-light ms-3" (click)="logout()">Logout</button> <!-- Logout Button -->
         </li>
       </ul>
-      <!-- User Profile Dropdown -->
-      <div class="dropdown">
-        <a
-          class="nav-link dropdown-toggle text-white d-flex align-items-center"
-          href="#"
-          id="userDropdown"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          <img
-            src="https://img.freepik.com/free-vector/young-man-with-glasses-illustration_1308-174706.jpg?semt=ais_hybrid"
-            class="rounded-circle me-2"
-            alt="User Avatar"
-            width="40"
-            height="40"
-          />
-          {{ userName }}
-        </a>
-        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-          <li>
-            <a class="dropdown-item" href="#" (click)="goToAccount()">Account</a>
-          </li>
-          <li>
-            <a class="dropdown-item text-danger" href="#" (click)="logout()">Logout</a>
-          </li>
-        </ul>
-      </div>
     </div>
   </div>
 </nav>
-
-<!-- Dashboard Content -->
 <div class="container my-4">
   <div class="row">
     <div class="col-12 text-center mb-4">
@@ -66,7 +26,6 @@
     </div>
   </div>
 
-  <!-- Cards Section -->
   <div class="row g-4">
     <div class="col-md-4">
       <div class="card shadow-sm">
@@ -117,22 +76,16 @@
           </thead>
           <tbody>
             <tr *ngFor="let transaction of transactions">
-              <td>{{ transaction.billId }}</td>
-              <td>{{ transaction.amount | currency }}</td>
+              <td>{{ transaction.bill_id }}</td>
+              <td>{{ transaction.amount | currency:'INR' }}</td>
               <td>
-                <span
-                  class="badge"
-                  [ngClass]="transaction.status === 'Paid' ? 'bg-success' : 'bg-warning'"
-                >
-                  {{ transaction.status }}
+                <span class="badge" [ngClass]="transaction.paymentStatus === 'Paid' ? 'bg-success' : 'bg-warning'">
+                  {{ transaction.paymentStatus }}
                 </span>
               </td>
               <td>{{ transaction.paymentDate || 'N/A' }}</td>
               <td>
-                <button
-                  class="btn btn-sm btn-outline-primary"
-                  (click)="viewTransaction(transaction)"
-                >
+                <button class="btn btn-sm btn-outline-primary" (click)="viewTransaction(transaction)">
                   View
                 </button>
               </td>
