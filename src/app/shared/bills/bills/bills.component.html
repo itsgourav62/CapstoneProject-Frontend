@@ -1,8 +1,12 @@
-<div *ngIf="bills.length > 0; else noBillsFound">
+
+<div class="card shadow-lg">
+  <div class="card-header bg-primary text-white">
     <h2>All Bills</h2>
+  </div>
+  <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered table-hover">
-        <thead class="table-primary">
+        <thead class="table-light">
           <tr>
             <th>Bill ID</th>
             <th>Amount</th>
@@ -11,17 +15,29 @@
             <th>Due Date</th>
             <th>Created At</th>
             <th>Description</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let bill of bills">
+          <tr
+            *ngFor="let bill of currentBills"
+            [ngClass]="{
+              'table-success': bill.billStatus === 'PAID',
+              'table-warning': bill.billStatus === 'PARTIALLY PAID',
+              'table-danger': bill.billStatus === 'PENDING'
+            }"
+          >
             <td>{{ bill.billId }}</td>
-            <td>{{ bill.amount | currency }}</td>
+            <td>{{ bill.amount | currency: 'INR' }}</td>
             <td>{{ bill.billType }}</td>
             <td>
               <span
                 class="badge"
-                [ngClass]="bill.billStatus === 'PAID' ? 'bg-success' : 'bg-danger'"
+                [ngClass]="{
+                  'bg-success': bill.billStatus === 'PAID',
+                  'bg-warning': bill.billStatus === 'PARTIALLY PAID',
+                  'bg-danger': bill.billStatus === 'PENDING'
+                }"
               >
                 {{ bill.billStatus }}
               </span>
@@ -29,18 +45,52 @@
             <td>{{ bill.due_date | date: 'mediumDate' }}</td>
             <td>{{ bill.created_at | date: 'medium' }}</td>
             <td>{{ bill.description }}</td>
+            <td>
+              <button
+                *ngIf="bill.billStatus === 'PENDING'"
+                class="btn btn-primary btn-sm"
+                (click)="payNow(bill.billId)"
+              >
+                Pay Now
+              </button>
+              <button
+                *ngIf="bill.billStatus === 'PAID'"
+                class="btn btn-success btn-sm"
+                [disabled]="true"
+              >
+                Paid
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
+      <button class="btn btn-secondary" [routerLink]="'/dashboard'">Back to Dashboard</button>
     </div>
   </div>
-  
-  <ng-template #noBillsFound>
-    <div class="text-center">
-      <h4>No Bills Found</h4>
-      <p>Explore our services and manage your bills easily.</p>
-      <button class="btn btn-primary" (click)="goToHome()">Back to Home</button>
-      <button class="btn btn-primary" routerLink='/dashboard'>Back to Dashboard</button>
-    </div>
-  </ng-template>
-  
+</div>
+
+<ng-template #noBillsFound>
+  <div class="text-center">
+    <h4>No Bills Found</h4>
+    <p>Explore our services and manage your bills easily.</p>
+</div>
+
+<ng-template #noBillsFound>
+<div class="text-center mt-5" style="visibility: visible; height: auto;">
+  <img
+    src="assets/images/no-bills.png"
+    alt="No Bills Found"
+    class="img-fluid"
+    style="max-width: 200px; margin-bottom: 20px;"
+  />
+  <h4>No Bills Found</h4>
+  <p>Explore our services and manage your bills easily.</p>
+  <div class="mt-4">
+    <button class="btn btn-primary" (click)="goToHome()">Back to Home</button>
+    <button class="btn btn-primary" routerLink='/dashboard'>Back to Dashboard</button>
+    <button class="btn btn-secondary" [routerLink]="'/dashboard'">Back to Dashboard</button>
+  </div>
+
+
+</div>
+</ng-template>
