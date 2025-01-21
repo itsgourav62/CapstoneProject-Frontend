@@ -14,13 +14,11 @@ export class ManagePaymentsComponent implements OnInit {
   selectedPayment: Payment = { pmtId: 0, amount: 0, paymentStatus: '', paymentDate: '', bill_id: 0 };
   isModalVisible: boolean = false;
 
-
   constructor(private paymentService: PaymentService) {}
 
   ngOnInit(): void {
     this.fetchPayments();
   }
-
 
   openUpdateModal(payment: Payment): void {
     this.selectedPayment = { ...payment }; // Clone the payment to the selectedPayment
@@ -45,7 +43,6 @@ export class ManagePaymentsComponent implements OnInit {
     }
   }
 
-
   // Fetch all payments
   fetchPayments(): void {
     this.paymentService.fetchAllPayments().subscribe({
@@ -56,51 +53,46 @@ export class ManagePaymentsComponent implements OnInit {
 
   // Search payments by user ID
   searchByUserId(): void {
-    const userId = this.searchCriteria.userId; // Ensure valid user ID
+    const userId = this.searchCriteria.userId;
     if (userId > 0) {
       this.paymentService.searchPaymentsByUserId(userId).subscribe({
         next: (data) => {
           this.payments = Array.isArray(data) ? data : [];
-          console.log('Payments:', this.payments); // Optional for debugging
         },
         error: (error) => {
           this.errorMessage = `Error fetching payments: ${error.message}`;
-          console.error(error);
         },
       });
     } else {
-      this.errorMessage = 'Invalid User ID';
+      this.errorMessage = 'Please enter a valid User ID';
     }
   }
-  
-  
 
   // Search payments by status
   searchByStatus(): void {
-    if (this.searchCriteria.status) {
-      this.paymentService.searchPaymentsByStatus(this.searchCriteria.status).subscribe({
-        next: (data) => (this.payments = data),
-        error: (error) => (this.errorMessage = error.message),
+    const status = this.searchCriteria.status;
+    if (status.trim()) {
+      this.paymentService.searchPaymentsByStatus(status).subscribe({
+        next: (data) => {
+          this.payments = data;
+        },
+        error: (error) => {
+          this.errorMessage = `Error fetching payments by status: ${error.message}`;
+        },
       });
+    } else {
+      this.errorMessage = 'Please enter a valid status';
     }
   }
 
-  // Update a payment
-  updatePayment(payment: Payment): void {
-    this.paymentService.updatePayment(payment).subscribe({
-      next: (updatedPayment) => {
-        const index = this.payments.findIndex((p) => p.pmtId === updatedPayment.pmtId);
-        if (index > -1) {
-          this.payments[index] = updatedPayment;  // Update the payment in the list
-        }
-      },
-      error: (error) => {
-        console.error('Error updating payment:', error);  // Handle error appropriately
-        this.errorMessage = error.message;
-      },
-    });
-}
-
+  // Clear search fields
+  clearSearch(fieldName: string): void {
+    if (fieldName === 'userId') {
+      this.searchCriteria.userId = 0;  // Reset userId field
+    } else if (fieldName === 'status') {
+      this.searchCriteria.status = '';  // Reset status field
+    }
+  }
 
   // Delete a payment
   deletePayment(pmtId: number): void {
