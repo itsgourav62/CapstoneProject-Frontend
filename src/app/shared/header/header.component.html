@@ -1,11 +1,98 @@
-<!-- Add Font Awesome for icons -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<!-- QwikPay Header - CRED Inspired Design -->
+<header class="qwikpay-header">
+  <nav class="navbar-neopop">
+    <div class="navbar-container">
+      <!-- Brand Logo -->
+      <div class="brand-container">
+        <a routerLink="/" class="brand-link">
+          <div class="brand-icon">
+            <i class="fas fa-wallet"></i>
+          </div>
+          <span class="brand-text">QwikPay</span>
+        </a>
+      </div>
 
-<nav class="navbar navbar-expand-lg navbar-light" style="background: linear-gradient(to right, #e0eafc, #cfdef3);">
-  <div class="container-fluid">
-    <!-- Brand Name with Icon -->
-    <a class="navbar-brand fw-bold d-flex align-items-center" href="#">
-      <i class="fas fa-wallet me-2"></i> QwikPay
-    </a>
+      <!-- Navigation Menu -->
+      <div class="nav-menu" id="navMenu">
+        <ul class="nav-links">
+          <li class="nav-item">
+            <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+              <i class="fas fa-home nav-icon"></i>
+              <span>Home</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/bills" class="nav-link" routerLinkActive="active">
+              <i class="fas fa-file-invoice nav-icon"></i>
+              <span>Bills</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/payment" class="nav-link" routerLinkActive="active">
+              <i class="fas fa-credit-card nav-icon"></i>
+              <span>Pay</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/dashboard" class="nav-link" routerLinkActive="active">
+              <i class="fas fa-tachometer-alt nav-icon"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+        </ul>
 
-    
+        <!-- Auth Buttons -->
+        <div class="auth-buttons">
+          <a routerLink="/signin" class="btn-neopop btn-neopop-secondary btn-sm">
+            <i class="fas fa-sign-in-alt"></i>
+            <span class="btn-text">Sign In</span>
+          </a>
+          <a routerLink="/signup" class="btn-neopop btn-neopop-primary btn-sm">
+            <i class="fas fa-user-plus"></i>
+            <span class="btn-text">Sign Up</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Toggle -->
+      <div class="mobile-menu-toggle" (click)="toggleMobileMenu()">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" [class.active]="isMobileMenuOpen">
+    <div class="mobile-menu-content">
+      <div class="mobile-nav-links">
+        <a routerLink="/" class="mobile-nav-link" (click)="closeMobileMenu()">
+          <i class="fas fa-home"></i>
+          Home
+        </a>
+        <a routerLink="/bills" class="mobile-nav-link" (click)="closeMobileMenu()">
+          <i class="fas fa-file-invoice"></i>
+          Bills
+        </a>
+        <a routerLink="/payment" class="mobile-nav-link" (click)="closeMobileMenu()">
+          <i class="fas fa-credit-card"></i>
+          Pay
+        </a>
+        <a routerLink="/dashboard" class="mobile-nav-link" (click)="closeMobileMenu()">
+          <i class="fas fa-tachometer-alt"></i>
+          Dashboard
+        </a>
+      </div>
+      
+      <div class="mobile-auth-buttons">
+        <a routerLink="/signin" class="btn-neopop btn-neopop-secondary" (click)="closeMobileMenu()">
+          Sign In
+        </a>
+        <a routerLink="/signup" class="btn-neopop btn-neopop-primary" (click)="closeMobileMenu()">
+          Sign Up
+        </a>
+      </div>
+    </div>
+  </div>
+</header>

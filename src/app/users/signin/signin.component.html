@@ -1,53 +1,151 @@
 
-<div class="signin-container d-flex justify-content-center align-items-center vh-100 bg-light">
-    <div class="signin-box p-4 border rounded shadow-lg bg-white w-100" style="max-width: 400px;">
-      <h2 class="text-center text-primary mb-4">Welcome Back!</h2>
-      <p class="text-center mb-4 text-muted">Please sign in to continue your secure transaction.</p>
-  
-      <form [formGroup]="signinForm" (ngSubmit)="onSubmit()">
-        <div class="form-group mb-3">
-          <label for="username" class="form-label">Username:</label>
-          <input 
-            id="username" 
-            type="text" 
-            formControlName="username" 
-            class="form-control" 
-            placeholder="Enter your username"
-            [ngClass]="{'is-invalid': signinForm.get('username')?.invalid && signinForm.get('username')?.touched}"
-          />
-          <div class="invalid-feedback" *ngIf="signinForm.get('username')?.invalid && signinForm.get('username')?.touched">
-            <ng-container *ngIf="signinForm.get('username')?.hasError('required')">Username is required.</ng-container>
+<!-- QwikPay SignIn - CRED Inspired Design -->
+<div class="signin-page">
+  <div class="signin-container">
+    <!-- Background Elements -->
+    <div class="background-elements">
+      <div class="floating-shape shape-1"></div>
+      <div class="floating-shape shape-2"></div>
+      <div class="floating-shape shape-3"></div>
+    </div>
+
+    <!-- Header -->
+    <div class="signin-header">
+      <div class="brand-logo">
+        <a routerLink="/" class="brand-link">
+          <div class="brand-icon">
+            <i class="fas fa-wallet"></i>
+          </div>
+          <span class="brand-text">QwikPay</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="signin-content">
+      <div class="signin-card card-neopop">
+        <div class="signin-card-header">
+          <h1 class="signin-title">
+            Welcome <span class="text-gradient">Back</span>
+          </h1>
+          <p class="signin-subtitle">
+            Sign in to continue your premium payment experience
+          </p>
+        </div>
+
+        <form [formGroup]="signinForm" (ngSubmit)="onSubmit()" class="signin-form">
+          <!-- Username Field -->
+          <div class="form-group">
+            <label for="username" class="form-label">
+              <i class="fas fa-user form-label-icon"></i>
+              Username
+            </label>
+            <div class="input-wrapper">
+              <input 
+                id="username" 
+                type="text" 
+                formControlName="username" 
+                class="form-control-neopop" 
+                placeholder="Enter your username"
+                [class.error]="signinForm.get('username')?.invalid && signinForm.get('username')?.touched"
+              />
+              <div class="input-underline"></div>
+            </div>
+            <div class="error-message" *ngIf="signinForm.get('username')?.invalid && signinForm.get('username')?.touched">
+              <i class="fas fa-exclamation-circle"></i>
+              <span *ngIf="signinForm.get('username')?.hasError('required')">Username is required</span>
+            </div>
+          </div>
+          
+          <!-- Password Field -->
+          <div class="form-group">
+            <label for="password" class="form-label">
+              <i class="fas fa-lock form-label-icon"></i>
+              Password
+            </label>
+            <div class="input-wrapper">
+              <input 
+                id="password" 
+                [type]="showPassword ? 'text' : 'password'"
+                formControlName="password" 
+                class="form-control-neopop" 
+                placeholder="Enter your password"
+                [class.error]="signinForm.get('password')?.invalid && signinForm.get('password')?.touched"
+              />
+              <button 
+                type="button" 
+                class="password-toggle"
+                (click)="togglePasswordVisibility()"
+              >
+                <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+              </button>
+              <div class="input-underline"></div>
+            </div>
+            <div class="error-message" *ngIf="signinForm.get('password')?.invalid && signinForm.get('password')?.touched">
+              <i class="fas fa-exclamation-circle"></i>
+              <span *ngIf="signinForm.get('password')?.hasError('required')">Password is required</span>
+              <span *ngIf="signinForm.get('password')?.hasError('minlength')">Password must be at least 6 characters</span>
+            </div>
+          </div>
+
+          <!-- Forgot Password Link -->
+          <div class="forgot-password">
+            <a routerLink="/forgotpassword" class="forgot-link">
+              <i class="fas fa-key"></i>
+              Forgot Password?
+            </a>
+          </div>
+          
+          <!-- Submit Button -->
+          <button 
+            type="submit" 
+            class="btn-neopop btn-neopop-primary submit-btn" 
+            [disabled]="signinForm.invalid"
+            [class.loading]="isLoading"
+          >
+            <span *ngIf="!isLoading">
+              <i class="fas fa-sign-in-alt"></i>
+              Sign In
+            </span>
+            <span *ngIf="isLoading" class="loading-content">
+              <i class="fas fa-spinner fa-spin"></i>
+              Signing In<span class="loading-dots"></span>
+            </span>
+          </button>
+        </form>
+
+        <!-- Social Signin -->
+        <div class="social-signin">
+          <div class="divider">
+            <span class="divider-text">Or continue with</span>
+          </div>
+          
+          <div class="social-buttons">
+            <button class="social-btn" disabled>
+              <i class="fab fa-google"></i>
+              Google
+            </button>
+            <button class="social-btn" disabled>
+              <i class="fab fa-apple"></i>
+              Apple
+            </button>
           </div>
         </div>
-        
-        <div class="form-group mb-4">
-          <label for="password" class="form-label">Password:</label>
-          <input 
-            id="password" 
-            type="password" 
-            formControlName="password" 
-            class="form-control" 
-            placeholder="Enter your password"
-            [ngClass]="{'is-invalid': signinForm.get('password')?.invalid && signinForm.get('password')?.touched}"
-          />
-          <div class="invalid-feedback" *ngIf="signinForm.get('password')?.invalid && signinForm.get('password')?.touched">
-            <ng-container *ngIf="signinForm.get('password')?.hasError('required')">Password is required.</ng-container>
-            <ng-container *ngIf="signinForm.get('password')?.hasError('minlength')">Password must be at least 6 characters long.</ng-container>
-          </div>
+
+        <!-- Footer -->
+        <div class="signin-footer">
+          <p class="signup-prompt">
+            New to QwikPay? 
+            <a routerLink="/signup" class="signup-link">
+              Create Account
+              <i class="fas fa-arrow-right"></i>
+            </a>
+          </p>
         </div>
-        
-  
-        <!-- <div class="error-message text-center text-danger mb-4" *ngIf="errorMessage">
-          <strong>{{ errorMessage }}</strong>
-        </div>
-   -->
-        <button type="submit" class="btn btn-primary w-100" [disabled]="signinForm.invalid">Sign In</button>
-      </form>
-  
-      <div class="text-center mt-3">
-        <p class="text-muted">New user? <a routerLink="/signup" class="text-decoration-none text-primary">Register here</a></p>
       </div>
     </div>
   </div>
-  <!-- Toasts -->
+</div>
+
+<!-- Toast Messages -->
 <p-toast></p-toast>

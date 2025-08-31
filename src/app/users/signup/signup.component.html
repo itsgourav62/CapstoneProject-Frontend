@@ -1,135 +1,262 @@
-<div class="signup-container d-flex justify-content-center align-items-center vh-100 bg-light">
-  <div class="signup-box p-4 border rounded shadow-lg bg-white w-100" style="max-width: 500px;">
-    <h2 class="text-center text-primary mb-4">Create Your Account</h2>
-    <p class="text-center mb-4 text-muted">Sign up to manage your bill payments seamlessly.</p>
+<!-- QwikPay SignUp - CRED Inspired Design -->
+<div class="signup-page">
+  <!-- Background Elements -->
+  <div class="background-elements">
+    <div class="floating-shape shape-1"></div>
+    <div class="floating-shape shape-2"></div>
+    <div class="floating-shape shape-3"></div>
+    <div class="floating-shape shape-4"></div>
+  </div>
 
-    <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-      <!-- Step 1: Basic Details -->
-      <div *ngIf="currentStep === 1">
-        <h5 class="text-center mb-3">Step 1: Basic Details</h5>
-
-        <!-- email -->
-        <div class="form-group mb-3">
-          <label for="email" class="form-label">Email:</label>
-          <input
-            id="email"
-            type="email"
-            formControlName="email"
-            class="form-control"
-            placeholder="Enter your email address"
-            [ngClass]="{'is-invalid': signupForm.get('email')?.invalid && signupForm.get('email')?.touched}"
-          />
-          <div class="invalid-feedback" *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
-            A valid email address is required.
-          </div>
+  <div class="signup-container">
+    <!-- Header -->
+    <header class="signup-header">
+      <a routerLink="/" class="brand-link">
+        <div class="brand-icon">
+          <i class="pi pi-bolt"></i>
         </div>
-        
+        <span class="brand-text">QwikPay</span>
+      </a>
+    </header>
 
-
-        <!-- Mobile -->
-        <div class="form-group mb-3">
-          <label for="mobile" class="form-label">Mobile:</label>
-          <input
-            id="mobile"
-            type="text"
-            formControlName="mobile"
-            class="form-control"
-            placeholder="Enter your mobile number"
-            [ngClass]="{'is-invalid': signupForm.get('mobile')?.invalid && signupForm.get('mobile')?.touched}"
-          />
-          <div class="invalid-feedback" *ngIf="signupForm.get('mobile')?.invalid && signupForm.get('mobile')?.touched">
-            Mobile number is required and must be valid.
-          </div>
-        </div>
-
-        <!-- Address -->
-        <div class="form-group mb-3">
-          <label for="address" class="form-label">Address:</label>
-          <textarea
-            id="address"
-            formControlName="address"
-            class="form-control"
-            placeholder="Enter your address"
-            rows="3"
-            [ngClass]="{'is-invalid': signupForm.get('address')?.invalid && signupForm.get('address')?.touched}"
-          ></textarea>
-          <div class="invalid-feedback" *ngIf="signupForm.get('address')?.invalid && signupForm.get('address')?.touched">
-            Address is required.
+    <!-- Main Content -->
+    <main class="signup-content">
+      <div class="signup-card">
+        <div class="signup-card-header">
+          <h1 class="signup-title">
+            Join QwikPay
+          </h1>
+          <p class="signup-subtitle">
+            Start your seamless bill payment journey
+          </p>
+          <div class="step-indicator">
+            <div class="step" [class.active]="currentStep === 1" [class.completed]="currentStep > 1">
+              <span class="step-number">1</span>
+              <span class="step-label">Personal Info</span>
+            </div>
+            <div class="step-line" [class.completed]="currentStep > 1"></div>
+            <div class="step" [class.active]="currentStep === 2">
+              <span class="step-number">2</span>
+              <span class="step-label">Account Setup</span>
+            </div>
           </div>
         </div>
 
-        <!-- Gender -->
-        <div class="form-group mb-4">
-          <label for="gender" class="form-label">Gender:</label>
-          <select
-            id="gender"
-            formControlName="gender"
-            class="form-select"
-            [ngClass]="{'is-invalid': signupForm.get('gender')?.invalid && signupForm.get('gender')?.touched}"
-          >
-            <option value="">Select your gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Other">Other</option>
-          </select>
-          <div class="invalid-feedback" *ngIf="signupForm.get('gender')?.invalid && signupForm.get('gender')?.touched">
-            Gender selection is required.
-          </div>
-        </div>
+        <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="signup-form">
+          <!-- Step 1: Personal Details -->
+          <div *ngIf="currentStep === 1" class="step-content">
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email" class="form-label">
+                <i class="pi pi-envelope form-label-icon"></i>
+                Email Address
+              </label>
+              <div class="input-wrapper">
+                <input
+                  id="email"
+                  type="email"
+                  formControlName="email"
+                  class="form-control-neopop"
+                  [class.error]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+                  placeholder="your@email.com"
+                />
+                <div class="input-underline"></div>
+              </div>
+              <div class="error-message" *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+                <i class="pi pi-exclamation-triangle"></i>
+                Please enter a valid email address
+              </div>
+            </div>
 
-        <!-- Proceed Button -->
-        <button
-          type="button"
-          class="btn btn-primary w-100"
-          [disabled]="!signupForm.get('mobile')?.valid || !signupForm.get('address')?.valid || !signupForm.get('gender')?.valid"
-          (click)="goToStep(2)"
-        >
-          Proceed to Next Step
-        </button>
+            <!-- Mobile -->
+            <div class="form-group">
+              <label for="mobile" class="form-label">
+                <i class="pi pi-phone form-label-icon"></i>
+                Mobile Number
+              </label>
+              <div class="input-wrapper">
+                <input
+                  id="mobile"
+                  type="tel"
+                  formControlName="mobile"
+                  class="form-control-neopop"
+                  [class.error]="signupForm.get('mobile')?.invalid && signupForm.get('mobile')?.touched"
+                  placeholder="10-digit mobile number"
+                />
+                <div class="input-underline"></div>
+              </div>
+              <div class="error-message" *ngIf="signupForm.get('mobile')?.invalid && signupForm.get('mobile')?.touched">
+                <i class="pi pi-exclamation-triangle"></i>
+                Please enter a valid 10-digit mobile number
+              </div>
+            </div>
+
+            <!-- Address -->
+            <div class="form-group">
+              <label for="address" class="form-label">
+                <i class="pi pi-map-marker form-label-icon"></i>
+                Address
+              </label>
+              <div class="input-wrapper">
+                <textarea
+                  id="address"
+                  formControlName="address"
+                  class="form-control-neopop textarea"
+                  [class.error]="signupForm.get('address')?.invalid && signupForm.get('address')?.touched"
+                  placeholder="Enter your full address"
+                  rows="3"
+                ></textarea>
+                <div class="input-underline"></div>
+              </div>
+              <div class="error-message" *ngIf="signupForm.get('address')?.invalid && signupForm.get('address')?.touched">
+                <i class="pi pi-exclamation-triangle"></i>
+                Address is required
+              </div>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+              <label for="gender" class="form-label">
+                <i class="pi pi-user form-label-icon"></i>
+                Gender
+              </label>
+              <div class="input-wrapper">
+                <select
+                  id="gender"
+                  formControlName="gender"
+                  class="form-control-neopop select"
+                  [class.error]="signupForm.get('gender')?.invalid && signupForm.get('gender')?.touched"
+                >
+                  <option value="">Select your gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+                <div class="input-underline"></div>
+              </div>
+              <div class="error-message" *ngIf="signupForm.get('gender')?.invalid && signupForm.get('gender')?.touched">
+                <i class="pi pi-exclamation-triangle"></i>
+                Please select your gender
+              </div>
+            </div>
+
+            <!-- Continue Button -->
+            <button
+              type="button"
+              class="btn-neopop proceed-btn"
+              [disabled]="!isStep1Valid() || isLoading"
+              (click)="goToStep(2)"
+            >
+              <span *ngIf="!isLoading" class="btn-content">
+                Continue to Account Setup
+                <i class="pi pi-arrow-right"></i>
+              </span>
+              <span *ngIf="isLoading" class="loading-content">
+                <i class="pi pi-spin pi-spinner"></i>
+                Processing...
+              </span>
+            </button>
+          </div>
+
+          <!-- Step 2: Account Details -->
+          <div *ngIf="currentStep === 2" class="step-content">
+            <!-- Username -->
+            <div class="form-group">
+              <label for="username" class="form-label">
+                <i class="pi pi-at form-label-icon"></i>
+                Username
+              </label>
+              <div class="input-wrapper">
+                <input
+                  id="username"
+                  type="text"
+                  formControlName="username"
+                  class="form-control-neopop"
+                  [class.error]="signupForm.get('username')?.invalid && signupForm.get('username')?.touched"
+                  placeholder="Choose a unique username"
+                />
+                <div class="input-underline"></div>
+              </div>
+              <div class="error-message" *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched">
+                <i class="pi pi-exclamation-triangle"></i>
+                Username is required
+              </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+              <label for="password" class="form-label">
+                <i class="pi pi-lock form-label-icon"></i>
+                Password
+              </label>
+              <div class="input-wrapper">
+                <input
+                  id="password"
+                  [type]="showPassword ? 'text' : 'password'"
+                  formControlName="password"
+                  class="form-control-neopop"
+                  [class.error]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched"
+                  placeholder="Create a secure password"
+                />
+                <button
+                  type="button"
+                  class="password-toggle"
+                  (click)="togglePasswordVisibility()"
+                >
+                  <i [class]="showPassword ? 'pi pi-eye-slash' : 'pi pi-eye'"></i>
+                </button>
+                <div class="input-underline"></div>
+              </div>
+              <div class="error-message" *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+                <i class="pi pi-exclamation-triangle"></i>
+                Password must be at least 6 characters long
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="button-group">
+              <button
+                type="button"
+                class="btn-outline back-btn"
+                (click)="goToStep(1)"
+                [disabled]="isLoading"
+              >
+                <i class="pi pi-arrow-left"></i>
+                Back
+              </button>
+              <button
+                type="submit"
+                class="btn-neopop submit-btn"
+                [disabled]="signupForm.invalid || isLoading"
+                [class.loading]="isLoading"
+              >
+                <span *ngIf="!isLoading" class="btn-content">
+                  Create Account
+                  <i class="pi pi-check"></i>
+                </span>
+                <span *ngIf="isLoading" class="loading-content">
+                  <i class="pi pi-spin pi-spinner"></i>
+                  Creating Account...
+                </span>
+              </button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Footer -->
+        <div class="signup-footer">
+          <p class="signin-prompt">
+            Already have an account?
+            <a routerLink="/signin" class="signin-link">
+              Sign In
+              <i class="pi pi-arrow-right"></i>
+            </a>
+          </p>
+        </div>
       </div>
-
-      <!-- Step 2: Account Details -->
-      <div *ngIf="currentStep === 2">
-        <h5 class="text-center mb-3">Step 2: Account Details</h5>
-
-        <!-- Username -->
-        <div class="form-group mb-3">
-          <label for="username" class="form-label">Username:</label>
-          <input
-            id="username"
-            type="text"
-            formControlName="username"
-            class="form-control"
-            placeholder="Enter your username"
-            [ngClass]="{'is-invalid': signupForm.get('username')?.invalid && signupForm.get('username')?.touched}"
-          />
-          <div class="invalid-feedback" *ngIf="signupForm.get('username')?.invalid && signupForm.get('username')?.touched">
-            Username is required.
-          </div>
-        </div>
-
-        <!-- Password -->
-        <div class="form-group mb-4">
-          <label for="password" class="form-label">Password:</label>
-          <input
-            id="password"
-            type="password"
-            formControlName="password"
-            class="form-control"
-            placeholder="Enter your password"
-            [ngClass]="{'is-invalid': signupForm.get('password')?.invalid && signupForm.get('password')?.touched}"
-          />
-          <div class="invalid-feedback" *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
-            Password is required and must be at least 6 characters long.
-          </div>
-        </div>
-
-        <!-- Submit Button -->
-        <button type="submit" class="btn btn-primary w-100" [disabled]="signupForm.invalid">Submit</button>
-        <button type="button" class="btn btn-secondary w-100 mt-3" (click)="goToStep(1)">Back</button>
-      </div>
-    </form>
+    </main>
   </div>
 </div>
+
 <!-- Toasts -->
 <p-toast></p-toast>

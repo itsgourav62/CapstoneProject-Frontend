@@ -1,101 +1,273 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Dashboard</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <span class="navbar-text text-white">
-            Welcome, {{ userName }} <!-- Display Username -->
-          </span>
-        </li>
-        <li class="nav-item">
-          <button class="btn btn-outline-light ms-3" (click)="logout()">Logout</button> <!-- Logout Button -->
-        </li>
-      </ul>
+<!-- QwikPay Dashboard - Modern Financial Dashboard -->
+<div class="dashboard-container">
+  <!-- Header -->
+  <header class="dashboard-header">
+    <div class="header-content">
+      <div class="header-left">
+        <div class="brand-logo">
+          <div class="brand-icon">
+            <i class="pi pi-bolt"></i>
+          </div>
+          <span class="brand-text">QwikPay</span>
+        </div>
+        <div class="breadcrumb">
+          <span class="breadcrumb-text">Dashboard → Overview</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="user-info">
+          <span class="welcome-text">Welcome back,</span>
+          <span class="user-name">{{ userName }}</span>
+        </div>
+        <button class="btn-icon notification-btn">
+          <i class="pi pi-bell"></i>
+          <span class="notification-badge">3</span>
+        </button>
+        <button class="btn-icon settings-btn" (click)="goToAccount()">
+          <i class="pi pi-cog"></i>
+        </button>
+        <button class="logout-btn" (click)="logout()">
+          <i class="pi pi-sign-out"></i>
+          <span>Logout</span>
+        </button>
+      </div>
     </div>
-  </div>
-</nav>
-<div class="container my-4">
-  <div class="row">
-    <div class="col-12 text-center mb-4">
-      <h1>Welcome to Your Dashboard</h1>
-      <p class="text-muted">Manage your bills and payments with ease</p>
-    </div>
-  </div>
+  </header>
 
-  <div class="row g-4">
-    <div class="col-md-4">
-      <div class="card shadow-sm">
-        <div class="card-body text-center">
-          <h5 class="card-title">Pay Bills</h5>
-          <p class="card-text">Quickly pay your outstanding bills.</p>
-          <button class="btn btn-primary w-100" (click)="onPayNow()" [disabled]="isProcessing">
-            <span *ngIf="isProcessing" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
-            Pay Now
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card shadow-sm">
-        <div class="card-body text-center">
-          <h5 class="card-title">View Bills</h5>
-          <p class="card-text">See all your pending and paid bills.</p>
-          <button class="btn btn-success w-100" (click)="goToViewBills()">View Bills</button>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card shadow-sm">
-        <div class="card-body text-center">
-          <h5 class="card-title">Payment History</h5>
-          <p class="card-text">Track all your previous payments.</p>
-          <button class="btn btn-info w-100" (click)="goToPaymentHistory()">View History</button>
-        </div>
-      </div>
-    </div>
-  </div>
+  <!-- Main Dashboard Content -->
+  <main class="dashboard-main">
+    <div class="dashboard-grid">
+      <!-- Left Panel -->
+      <div class="left-panel">
+        <!-- Overview Section -->
+        <div class="overview-section">
+          <div class="section-header">
+            <h2 class="section-title">OVERVIEW</h2>
+            <div class="time-filter">
+              <button class="filter-btn active">Last month</button>
+              <div class="custom-range">
+                <span>Custom range</span>
+                <i class="pi pi-calendar"></i>
+              </div>
+            </div>
+          </div>
 
-  <!-- Recent Transactions -->
-  <div class="row mt-5">
-    <div class="col-12">
-      <h2>Recent Transactions</h2>
-      <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-          <thead class="table-primary">
-            <tr>
-              <th>Bill ID</th>
-              <th>Amount</th>
-              <th>Status</th>
-              <th>Payment Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let transaction of transactions">
-              <td>{{ transaction.bill_id }}</td>
-              <td>{{ transaction.amount | currency:'INR' }}</td>
-              <td>
-                <span class="badge" [ngClass]="transaction.paymentStatus === 'Paid' ? 'bg-success' : 'bg-warning'">
+          <!-- Popular Categories -->
+          <div class="popular-categories">
+            <h3 class="subsection-title">Popular category</h3>
+            <div class="category-list">
+              <div class="category-item" *ngFor="let category of popularCategories">
+                <div class="category-icon" [style.background-color]="category.color">
+                  <i [class]="category.icon"></i>
+                </div>
+                <span class="category-name">{{ category.name }}</span>
+                <span class="category-amount">₹{{ category.amount }}</span>
+                <i class="pi pi-chevron-right category-arrow"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Total Expenses -->
+          <div class="total-expenses">
+            <div class="expense-card">
+              <div class="expense-label">Total expenses</div>
+              <div class="expense-amount">₹{{ totalExpenses }}</div>
+              <div class="expense-period">{{ expensePeriod }}</div>
+              <div class="expense-indicators">
+                <span class="indicator positive">{{ positiveIndicator }}%</span>
+                <span class="indicator negative">{{ negativeIndicator }}%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Frequency of Transactions -->
+          <div class="frequency-section">
+            <h3 class="subsection-title">Frequency of transactions</h3>
+            <div class="frequency-stats">
+              <div class="frequency-item">
+                <div class="frequency-value">{{ dailyFrequency }}</div>
+                <div class="frequency-label">daily</div>
+                <div class="frequency-change negative">{{ dailyChange }}%</div>
+              </div>
+              <div class="frequency-item">
+                <div class="frequency-value">{{ weeklyFrequency }}</div>
+                <div class="frequency-label">weekly</div>
+                <div class="frequency-change positive">{{ weeklyChange }}%</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Section -->
+          <div class="charts-section">
+            <!-- Expenses Chart -->
+            <div class="chart-container">
+              <h3 class="chart-title">Expenses and weekly average</h3>
+              <div class="chart-content">
+                <canvas #expensesChart class="chart-canvas"></canvas>
+              </div>
+            </div>
+
+            <!-- Income Chart -->
+            <div class="chart-container">
+              <h3 class="chart-title">Expenses and income</h3>
+              <div class="income-stats">
+                <div class="income-item expenses">
+                  <span class="income-amount">₹{{ monthlyExpenses }}</span>
+                  <span class="income-label">{{ currentMonth }}</span>
+                </div>
+                <div class="income-item income">
+                  <span class="income-amount">₹{{ monthlyIncome }}</span>
+                  <span class="income-label">{{ currentMonth }}</span>
+                </div>
+              </div>
+              <div class="chart-content">
+                <canvas #incomeChart class="chart-canvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Panel -->
+      <div class="right-panel">
+        <!-- Popular Transactions -->
+        <div class="popular-transactions">
+          <h3 class="subsection-title">Popular transactions</h3>
+          <div class="transaction-list">
+            <div class="transaction-item" *ngFor="let transaction of popularTransactions">
+              <div class="transaction-info">
+                <span class="transaction-name">{{ transaction.name }}</span>
+                <span class="transaction-type">{{ transaction.type }}</span>
+              </div>
+              <span class="transaction-amount">₹{{ transaction.amount }}</span>
+              <i class="pi pi-chevron-right transaction-arrow"></i>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+          <h3 class="subsection-title">Quick Actions</h3>
+          <div class="action-buttons">
+            <button class="action-btn primary" (click)="onPayNow()" [disabled]="isProcessing">
+              <div class="action-icon">
+                <i class="pi pi-credit-card"></i>
+              </div>
+              <div class="action-content">
+                <span class="action-title">Pay Bills</span>
+                <span class="action-subtitle">Quick payment</span>
+              </div>
+              <i class="pi pi-arrow-right action-arrow"></i>
+            </button>
+
+            <button class="action-btn secondary" (click)="goToViewBills()">
+              <div class="action-icon">
+                <i class="pi pi-list"></i>
+              </div>
+              <div class="action-content">
+                <span class="action-title">View Bills</span>
+                <span class="action-subtitle">Manage bills</span>
+              </div>
+              <i class="pi pi-arrow-right action-arrow"></i>
+            </button>
+
+            <button class="action-btn tertiary" (click)="goToPaymentHistory()">
+              <div class="action-icon">
+                <i class="pi pi-history"></i>
+              </div>
+              <div class="action-content">
+                <span class="action-title">Payment History</span>
+                <span class="action-subtitle">Transaction log</span>
+              </div>
+              <i class="pi pi-arrow-right action-arrow"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Recent Transactions -->
+        <div class="recent-transactions">
+          <div class="transactions-header">
+            <h3 class="subsection-title">Recent Transactions</h3>
+            <button class="view-all-btn">View All</button>
+          </div>
+          <div class="transaction-cards">
+            <div class="transaction-card" *ngFor="let transaction of recentTransactions">
+              <div class="transaction-left">
+                <div class="transaction-icon" [class]="getTransactionIconClass(transaction.paymentStatus)">
+                  <i [class]="getTransactionIcon(transaction.paymentStatus)"></i>
+                </div>
+                <div class="transaction-details">
+                  <span class="transaction-title">Bill ID: {{ transaction.bill_id }}</span>
+                  <span class="transaction-date">{{ formatDate(transaction.paymentDate) }}</span>
+                </div>
+              </div>
+              <div class="transaction-right">
+                <span class="transaction-amount" [class]="getAmountClass(transaction.paymentStatus)">
+                  {{ getAmountPrefix(transaction.paymentStatus) }}₹{{ transaction.amount }}
+                </span>
+                <span class="transaction-status" [class]="getStatusClass(transaction.paymentStatus)">
                   {{ transaction.paymentStatus }}
                 </span>
-              </td>
-              <td>{{ transaction.paymentDate || 'N/A' }}</td>
-              <td>
-                <button class="btn btn-sm btn-outline-primary" (click)="viewTransaction(transaction)">
-                  View
-                </button>
-              </td>
-            </tr>
-            <tr *ngIf="transactions.length === 0">
-              <td colspan="5" class="text-center">No recent transactions</td>
-            </tr>
-          </tbody>
-        </table>
+              </div>
+            </div>
+            <div class="no-transactions" *ngIf="recentTransactions.length === 0">
+              <div class="no-transactions-icon">
+                <i class="pi pi-info-circle"></i>
+              </div>
+              <span class="no-transactions-text">No recent transactions</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Summary -->
+        <div class="account-summary">
+          <h3 class="subsection-title">Account Summary</h3>
+          <div class="summary-cards">
+            <div class="summary-card balance">
+              <div class="summary-icon">
+                <i class="pi pi-wallet"></i>
+              </div>
+              <div class="summary-content">
+                <span class="summary-label">Available Balance</span>
+                <span class="summary-value">₹{{ availableBalance }}</span>
+              </div>
+            </div>
+            <div class="summary-card pending">
+              <div class="summary-icon">
+                <i class="pi pi-clock"></i>
+              </div>
+              <div class="summary-content">
+                <span class="summary-label">Pending Bills</span>
+                <span class="summary-value">{{ pendingBillsCount }}</span>
+              </div>
+            </div>
+            <div class="summary-card savings">
+              <div class="summary-icon">
+                <i class="pi pi-chart-line"></i>
+              </div>
+              <div class="summary-content">
+                <span class="summary-label">Monthly Savings</span>
+                <span class="summary-value">₹{{ monthlySavings }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+  </main>
+
+  <!-- Background Elements -->
+  <div class="dashboard-background">
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+  </div>
+</div>
+
+<!-- Loading Spinner for Pay Now -->
+<div class="loading-overlay" *ngIf="isProcessing">
+  <div class="loading-content">
+    <div class="loading-spinner"></div>
+    <span class="loading-text">Processing Payment...</span>
   </div>
 </div>

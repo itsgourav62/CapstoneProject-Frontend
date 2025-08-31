@@ -1,0 +1,460 @@
+/* QwikPay SignIn - CRED Inspired Styles */
+
+.signin-page {
+  min-height: 100vh;
+  background: var(--gradient-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Elements */
+.background-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.floating-shape {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.1;
+  animation: floatAround 20s infinite linear;
+}
+
+.shape-1 {
+  width: 200px;
+  height: 200px;
+  background: var(--accent-blue);
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.shape-2 {
+  width: 150px;
+  height: 150px;
+  background: var(--accent-purple);
+  top: 60%;
+  right: 15%;
+  animation-delay: 7s;
+}
+
+.shape-3 {
+  width: 100px;
+  height: 100px;
+  background: var(--accent-green);
+  bottom: 20%;
+  left: 20%;
+  animation-delay: 14s;
+}
+
+@keyframes floatAround {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(50px, -30px) rotate(90deg); }
+  50% { transform: translate(-30px, 50px) rotate(180deg); }
+  75% { transform: translate(-50px, -20px) rotate(270deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+/* Container */
+.signin-container {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg);
+}
+
+/* Header */
+.signin-header {
+  padding: var(--spacing-lg) 0;
+}
+
+.brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  transition: all var(--transition-normal);
+}
+
+.brand-link:hover {
+  color: var(--accent-blue);
+  transform: scale(1.05);
+}
+
+.brand-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-neon);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  color: var(--primary-black);
+  box-shadow: var(--shadow-raised);
+}
+
+.brand-text {
+  font-family: var(--font-secondary);
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Main Content */
+.signin-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl) 0;
+}
+
+.signin-card {
+  width: 100%;
+  max-width: 450px;
+  padding: var(--spacing-2xl);
+  position: relative;
+}
+
+.signin-card-header {
+  text-align: center;
+  margin-bottom: var(--spacing-2xl);
+}
+
+.signin-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  font-family: var(--font-secondary);
+}
+
+.signin-subtitle {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0;
+}
+
+/* Form */
+.signin-form {
+  margin-bottom: var(--spacing-xl);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-xl);
+}
+
+.form-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-weight: 600;
+  color: white;
+  margin-bottom: var(--spacing-sm);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.form-label-icon {
+  color: var(--accent-blue);
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+.form-control-neopop {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  color: white;
+  font-size: 1rem;
+  transition: all var(--transition-normal);
+  outline: none;
+}
+
+.form-control-neopop::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.form-control-neopop:focus {
+  border-color: var(--accent-blue);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.1);
+}
+
+.form-control-neopop.error {
+  border-color: var(--accent-pink);
+  background: rgba(255, 107, 157, 0.1);
+}
+
+.input-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--gradient-neon);
+  transition: width var(--transition-normal);
+}
+
+.form-control-neopop:focus + .input-underline {
+  width: 100%;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color var(--transition-normal);
+}
+
+.password-toggle:hover {
+  color: var(--accent-blue);
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--accent-pink);
+  font-size: 0.875rem;
+  margin-top: var(--spacing-xs);
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: var(--spacing-xl);
+}
+
+.forgot-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all var(--transition-normal);
+}
+
+.forgot-link:hover {
+  color: white;
+  transform: translateX(4px);
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-btn.loading {
+  pointer-events: none;
+}
+
+.loading-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.loading-dots::after {
+  content: '';
+  animation: loadingDots 1.5s infinite;
+}
+
+/* Social Signin */
+.social-signin {
+  margin-bottom: var(--spacing-xl);
+}
+
+.divider {
+  position: relative;
+  text-align: center;
+  margin: var(--spacing-xl) 0;
+}
+
+.divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.divider-text {
+  background: var(--primary-gray);
+  padding: 0 var(--spacing-md);
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.875rem;
+  position: relative;
+}
+
+.social-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 500;
+  cursor: not-allowed;
+  transition: all var(--transition-normal);
+}
+
+.social-btn:not(:disabled):hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.signin-footer {
+  text-align: center;
+}
+
+.signup-prompt {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 0;
+}
+
+.signup-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--accent-blue);
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: var(--spacing-xs);
+  transition: all var(--transition-normal);
+}
+
+.signup-link:hover {
+  color: white;
+  transform: translateX(4px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .signin-container {
+    padding: var(--spacing-md);
+  }
+  
+  .signin-card {
+    padding: var(--spacing-xl);
+  }
+  
+  .signin-title {
+    font-size: 2rem;
+  }
+  
+  .social-buttons {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-container {
+    padding: var(--spacing-sm);
+  }
+  
+  .signin-card {
+    padding: var(--spacing-lg);
+  }
+  
+  .signin-title {
+    font-size: 1.75rem;
+  }
+  
+  .form-control-neopop {
+    padding: 14px 16px;
+  }
+  
+  .submit-btn {
+    padding: 14px;
+    font-size: 1rem;
+  }
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.signin-card {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.form-group {
+  animation: slideInUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+
+/* Focus states */
+.form-control-neopop:focus {
+  transform: scale(1.02);
+}
+
+/* Button pulse effect */
+@keyframes buttonPulse {
+  0% { box-shadow: var(--shadow-raised); }
+  50% { box-shadow: var(--shadow-raised), 0 0 30px rgba(0, 212, 255, 0.3); }
+  100% { box-shadow: var(--shadow-raised); }
+}
+
+.submit-btn:not(:disabled):hover {
+  animation: buttonPulse 1s infinite;
+}

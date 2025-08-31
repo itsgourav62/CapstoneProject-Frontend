@@ -12,6 +12,6 @@ export class AdminDashboardComponent{
 
   logout() {
     localStorage.clear(); // Clear session data
-    this.router.navigate(['/login']); // Navigate to the login page
+    this.router.navigate(['/signin']); // Navigate to the signin page
   }
 }

@@ -1,0 +1,351 @@
+/* QwikPay Global Styles - CRED Inspired Design System */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* CSS Variables - NeoPOP Inspired Color Palette */
+:root {
+  /* Primary Colors */
+  --primary-black: #0A0A0A;
+  --primary-dark: #1A1A1A;
+  --primary-gray: #2A2A2A;
+  --primary-light-gray: #3A3A3A;
+  
+  /* Accent Colors */
+  --accent-blue: #00D4FF;
+  --accent-purple: #8B5CF6;
+  --accent-green: #10F789;
+  --accent-pink: #FF6B9D;
+  --accent-yellow: #FFD93D;
+  --accent-orange: #FF8A3D;
+  
+  /* Gradient Colors */
+  --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --gradient-dark: linear-gradient(135deg, #0A0A0A 0%, #2A2A2A 100%);
+  --gradient-light: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  --gradient-neon: linear-gradient(135deg, #00D4FF 0%, #8B5CF6 100%);
+  
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-secondary: 'Crimson Text', Georgia, serif;
+  
+  /* Shadows - Neuromorphic */
+  --shadow-light: 0 8px 32px rgba(255, 255, 255, 0.1);
+  --shadow-dark: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-inset: inset 0 4px 8px rgba(0, 0, 0, 0.2);
+  --shadow-raised: 0 4px 16px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  /* Borders */
+  --border-radius-sm: 8px;
+  --border-radius-md: 12px;
+  --border-radius-lg: 16px;
+  --border-radius-xl: 24px;
+  
+  /* Spacing */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  
+  /* Transitions */
+  --transition-fast: 0.15s ease-out;
+  --transition-normal: 0.3s ease-out;
+  --transition-slow: 0.5s ease-out;
+}
+
+/* Global Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-primary);
+  background: var(--gradient-dark);
+  color: #ffffff;
+  line-height: 1.6;
+  font-weight: 400;
+  overflow-x: hidden;
+}
+
+/* Typography Scale */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: var(--spacing-md);
+}
+
+h1 { font-size: 3rem; }
+h2 { font-size: 2.5rem; }
+h3 { font-size: 2rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-bottom: var(--spacing-md);
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* NeoPOP Button System */
+.btn-neopop {
+  position: relative;
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-family: var(--font-primary);
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all var(--transition-normal);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  background: var(--primary-gray);
+  color: white;
+  box-shadow: var(--shadow-raised);
+}
+
+.btn-neopop::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left var(--transition-normal);
+}
+
+.btn-neopop:hover::before {
+  left: 100%;
+}
+
+.btn-neopop:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-dark), 0 4px 20px rgba(0, 212, 255, 0.2);
+}
+
+.btn-neopop:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-inset);
+}
+
+/* Button Variants */
+.btn-neopop-primary {
+  background: var(--gradient-neon);
+  color: var(--primary-black);
+}
+
+.btn-neopop-secondary {
+  background: var(--primary-light-gray);
+  color: white;
+}
+
+.btn-neopop-accent {
+  background: var(--accent-green);
+  color: var(--primary-black);
+}
+
+/* Neuromorphic Cards */
+.card-neopop {
+  background: var(--primary-gray);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-raised);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-neopop::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+}
+
+.card-neopop:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-dark), 0 8px 32px rgba(0, 212, 255, 0.1);
+}
+
+/* Animated Gradients */
+.gradient-animated {
+  background: linear-gradient(-45deg, #667eea, #764ba2, #00D4FF, #8B5CF6);
+  background-size: 400% 400%;
+  animation: gradientShift 6s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Loading Animation */
+.loading-dots {
+  display: inline-block;
+}
+
+.loading-dots::after {
+  content: '';
+  animation: loadingDots 1.5s infinite;
+}
+
+@keyframes loadingDots {
+  0%, 20% { content: ''; }
+  40% { content: '.'; }
+  60% { content: '..'; }
+  80%, 100% { content: '...'; }
+}
+
+/* Utility Classes */
+.text-gradient {
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--primary-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-light-gray);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-blue);
+}
+
+/* Form Elements */
+.form-control-neopop {
+  background: var(--primary-gray);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  padding: 12px 16px;
+  color: white;
+  font-family: var(--font-primary);
+  transition: all var(--transition-normal);
+}
+
+.form-control-neopop:focus {
+  outline: none;
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
+
+.form-control-neopop::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  h1 { font-size: 2.5rem; }
+  h2 { font-size: 2rem; }
+  h3 { font-size: 1.75rem; }
+  
+  .btn-neopop {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .card-neopop {
+    padding: var(--spacing-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+}
+
+/* PrimeNG Overrides for Dark Theme */
+.p-toast .p-toast-message {
+  background: var(--primary-gray);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-raised);
+}
+
+.p-toast .p-toast-message .p-toast-message-content {
+  color: white;
+}
+
+.p-dropdown {
+  background: var(--primary-gray);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-md);
+}
+
+.p-dropdown .p-dropdown-label {
+  color: white;
+}
+
+/* Bootstrap Overrides */
+.btn-primary {
+  background: var(--gradient-neon);
+  border: none;
+  border-radius: var(--border-radius-md);
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: all var(--transition-normal);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-dark);
+}
+
+.card {
+  background: var(--primary-gray);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-lg);
+  transition: all var(--transition-normal);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-raised);
+}

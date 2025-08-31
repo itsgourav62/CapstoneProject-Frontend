@@ -1,0 +1,403 @@
+/* QwikPay Footer - CRED Inspired Styles */
+
+.footer-neopop {
+  background: var(--primary-gray);
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Background Elements */
+.footer-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+}
+
+.footer-glow {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.03;
+  filter: blur(60px);
+}
+
+.footer-glow-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--accent-blue);
+  top: -200px;
+  left: -100px;
+  animation: footerFloat 20s infinite ease-in-out;
+}
+
+.footer-glow-2 {
+  width: 300px;
+  height: 300px;
+  background: var(--accent-purple);
+  bottom: -150px;
+  right: -100px;
+  animation: footerFloat 25s infinite ease-in-out reverse;
+}
+
+@keyframes footerFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.1); }
+}
+
+/* Main Footer */
+.footer-main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--spacing-2xl);
+  padding: var(--spacing-2xl) var(--spacing-lg);
+}
+
+/* Brand Section */
+.footer-brand {
+  max-width: 400px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.brand-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--gradient-neon);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--primary-black);
+  box-shadow: var(--shadow-raised);
+}
+
+.brand-text {
+  font-family: var(--font-secondary);
+  font-size: 1.75rem;
+  font-weight: 700;
+  background: var(--gradient-neon);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.brand-description {
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-lg);
+  font-size: 0.95rem;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.social-link {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--border-radius-md);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  font-size: 1.125rem;
+}
+
+.social-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--accent-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-raised);
+}
+
+/* Footer Links */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-xl);
+}
+
+.footer-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section-icon {
+  color: var(--accent-blue);
+  font-size: 1.125rem;
+}
+
+.footer-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-menu li {
+  margin-bottom: var(--spacing-sm);
+}
+
+.footer-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: rgba(255, 255, 255, 0.7);
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: all var(--transition-normal);
+  padding: var(--spacing-xs) 0;
+}
+
+.footer-link:hover {
+  color: var(--accent-blue);
+  transform: translateX(4px);
+}
+
+.footer-link i {
+  font-size: 0.875rem;
+  width: 16px;
+  opacity: 0.8;
+}
+
+/* App Download Section */
+.footer-app {
+  padding: var(--spacing-xl) var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.app-section {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.app-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: var(--spacing-md);
+  font-family: var(--font-secondary);
+}
+
+.app-icon {
+  color: var(--accent-blue);
+  font-size: 1.75rem;
+}
+
+.app-description {
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: var(--spacing-xl);
+  line-height: 1.6;
+}
+
+.app-buttons {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-md);
+}
+
+.app-button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-lg);
+  color: white;
+  text-decoration: none;
+  transition: all var(--transition-normal);
+  min-width: 180px;
+}
+
+.app-button:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--accent-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-raised);
+  color: white;
+}
+
+.app-button-icon {
+  font-size: 2rem;
+  color: var(--accent-blue);
+}
+
+.app-button-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.app-button-label {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1;
+}
+
+.app-button-store {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  padding: var(--spacing-lg);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.copyright p {
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+  font-size: 0.875rem;
+}
+
+.footer-badges {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.security-badge,
+.uptime-badge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-sm);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.security-badge i {
+  color: var(--accent-green);
+}
+
+.uptime-badge i {
+  color: var(--accent-blue);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-xl);
+  }
+  
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-main {
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+  
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
+  }
+  
+  .app-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .app-button {
+    width: 100%;
+    max-width: 250px;
+    justify-content: center;
+  }
+  
+  .footer-bottom-content {
+    flex-direction: column;
+    gap: var(--spacing-md);
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-main {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+  
+  .footer-app {
+    padding: var(--spacing-lg) var(--spacing-sm);
+  }
+  
+  .footer-bottom {
+    padding: var(--spacing-md) var(--spacing-sm);
+  }
+  
+  .brand-logo {
+    justify-content: center;
+    text-align: center;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+  
+  .footer-badges {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Animation delays for sections */
+.footer-section:nth-child(1) { animation-delay: 0.1s; }
+.footer-section:nth-child(2) { animation-delay: 0.2s; }
+.footer-section:nth-child(3) { animation-delay: 0.3s; }
+
+/* Hover effects for sections */
+.footer-section:hover .section-icon {
+  color: var(--accent-purple);
+  transform: scale(1.1);
+}

@@ -1,0 +1,119 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start Angular Development Server",
+			"type": "shell",
+			"command": "ng serve",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Install Dependencies",
+			"type": "shell",
+			"command": "npm install",
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Start Angular Development Server",
+			"type": "shell",
+			"command": "npx ng serve",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Start Angular Development Server with npx",
+			"type": "shell",
+			"command": "npx ng serve --open",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Start QwikPay App",
+			"type": "shell",
+			"command": "npm start",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Start QwikPay App on Port 4201",
+			"type": "shell",
+			"command": "npm start -- --port 4201 --open",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Install Chart.js",
+			"type": "shell",
+			"command": "npm install chart.js",
+			"isBackground": false,
+			"group": "build"
+		},
+		{
+			"label": "Serve Angular App",
+			"type": "shell",
+			"command": "ng serve",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Serve Angular App with npx",
+			"type": "shell",
+			"command": "npx ng serve",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build Angular App",
+			"type": "shell",
+			"command": "npx ng build",
+			"isBackground": false,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Build Angular App Check",
+			"type": "shell",
+			"command": "npx ng build",
+			"isBackground": false,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		},
+		{
+			"label": "Start QwikPay Frontend",
+			"type": "shell",
+			"command": "npx ng serve --open",
+			"isBackground": true,
+			"problemMatcher": [
+				"$tsc"
+			],
+			"group": "build"
+		}
+	]
+}
